@@ -43,13 +43,32 @@ public class AuthenticationServlet extends HttpServlet {
 				ResultSet rs = preparedStatement.executeQuery();
 				if (rs.next()) {
 					String fName = rs.getString("firstname");
-					HttpSession session = request.getSession();
-					session.setAttribute("first_name", fName);
-					response.sendRedirect("dashboard.jsp");
+					String lName = rs.getString("lastname");
+					String email = rs.getString("email");
+					String pass = rs.getString("password");
+					String role = rs.getString("role");
+					//System.out.println("Role: "+role);
+					
+					if(role.equals("admin")) {
+						HttpSession session = request.getSession();
+						session.setAttribute("first_name", fName);
+						session.setAttribute("last_name", lName);
+						session.setAttribute("email", email);
+						session.setAttribute("pass", pass);
+						
+						response.sendRedirect("dashboardAdmin.jsp");
+					}
+					if(role.equals("client")) {  
+						//do something else
+					}
+					
+					
 				}
 				else {
+					response.setContentType("text/html");
 					PrintWriter pw = response.getWriter();
-					pw.write("Invalid Credentials");
+					pw.write("<p style='color:red;'>Invalid Credentials</p>");
+					request.getRequestDispatcher("login.jsp").include(request, response);
 				}
 			}
 
