@@ -31,6 +31,7 @@ public class AuthenticationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+
 		try {
 			Connection conn = DatabaseAccess.connectDataBase();
 			if (conn != null) {
@@ -47,24 +48,22 @@ public class AuthenticationServlet extends HttpServlet {
 					String email = rs.getString("email");
 					String pass = rs.getString("password");
 					String role = rs.getString("role");
-					//System.out.println("Role: "+role);
-					
-					if(role.equals("admin")) {
+					// System.out.println("Role: "+role);
+
+					if (role.equals("admin")) {
 						HttpSession session = request.getSession();
 						session.setAttribute("first_name", fName);
 						session.setAttribute("last_name", lName);
 						session.setAttribute("email", email);
 						session.setAttribute("pass", pass);
-						
-						response.sendRedirect("dashboardAdmin.jsp");
+
+						response.sendRedirect("dashboard.jsp");
 					}
-					if(role.equals("client")) {  
-						//do something else
+					if (role.equals("client")) {
+						// do something else
 					}
-					
-					
-				}
-				else {
+
+				} else {
 					response.setContentType("text/html");
 					PrintWriter pw = response.getWriter();
 					pw.write("<p style='color:red;'>Invalid Credentials</p>");
