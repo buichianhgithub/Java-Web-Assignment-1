@@ -42,7 +42,7 @@ ul li {
 		<li><a href="tap4.jsp">Tap 4</a></li>
 		<li style="float: right">Welcome <%=session.getAttribute("first_name") %></li>
 		<li style="float: right">
-			<form action="Logout">
+			<form action="login">
 				<input type="submit" value="Log Out">
 			</form>
 		</li>
