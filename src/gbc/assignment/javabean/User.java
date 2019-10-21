@@ -6,10 +6,26 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
     private String firstName;
     private String lastName;
-    private String address;
     private String email;
     private String password;
-    private String role = "client";
+    private String role;
+    
+    public User() {
+    	 firstName = "";
+    	 lastName = "";
+    	 email = "";
+    	 password = "";
+    	 role = "";
+    	 
+    	 }
+
+    	 public User(String firstName, String lastName, String email,String password) {
+    	 this.firstName = firstName;
+    	 this.lastName = lastName;
+    	 this.email = email;
+    	 this.password = password;
+    	 this.role = "client";
+    	 }
     
 	public String getRole() {
 		return role;
@@ -27,12 +43,7 @@ public class User implements Serializable{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+
 	public String getEmail() {
 		return email;
 	}
